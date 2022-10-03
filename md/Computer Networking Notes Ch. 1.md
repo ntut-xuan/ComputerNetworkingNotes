@@ -37,6 +37,17 @@
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
   - 暫存器填滿時，Packet 可能會被丟棄(dropped)，造成 Packet loss
 
+## Network core: Circuit switching
+
+- Unnecessary store-and-forward
+- 端對端之間常時佔用，不共享頻寬
+- Switch 沒有 queueing delay
+- 當鏈路已滿時，拒絕新連線
+- Frequency Division Multiplexing (FDM)
+  - 利用光、電進行分頻，在該頻段下進行傳輸
+- Time Division Multiplexing (TDM)
+  - 分時段，各連線可在分配的時間內佔用範圍內之頻段進行傳輸
+
 ## Internet Protocal Stack
 
 - 主要分成五層。
