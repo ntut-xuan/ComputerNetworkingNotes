@@ -1,5 +1,42 @@
 # Computer Networking Notes Ch. 1
 
+## Access network
+
+- Cable-based access
+  - 基於電纜連線
+  - HFC，混合光纖同軸電纜
+- 電話線撥接 Digital subscriber line
+  - 基於現有電話線進行網路連線
+- Wireless access networks
+  - Wireless local area networks 區域無線網路 (WLANs)
+    - 涵蓋於單一場所周圍(100ft內)
+    - 802.11b/g/n/ac/ax
+      - 11,54,450Mbps......越新越快
+  - Wide-area cellular access networks
+    - 手機行動網路，基地臺大範圍覆蓋
+    - 4G、5G 行動上網
+
+## Physical media
+
+- Twisted pair (雙絞線)
+- Coaxial cable (同軸電纜)
+- Fiber optic cable (光纖)
+- Wireless radio (無線)
+
+## Network core: Packet switching
+
+- Store-and-forward
+  - 封包須完整送達路由器，才會再傳輸至下一節點。
+- Transmission rate
+  - $R = Transmission\ rate\ (\frac{bits}{sec}\ or\ bps)$
+  - 單位時間內可傳送的資料大小
+- Transmission delay
+  - $L = Packet\ size\ (bits)$
+  - $\displaystyle{d_{trans} = \frac{L}{R}}\ (sec)$
+- Queueing delay & packet loss
+  - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
+  - 暫存器填滿時，Packet 可能會被丟棄(dropped)，造成 Packet loss
+
 ## Internet Protocal Stack
 
 - 主要分成五層。
