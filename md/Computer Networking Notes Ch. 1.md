@@ -11,7 +11,7 @@
   - Wireless local area networks 區域無線網路 (WLANs)
     - 涵蓋於單一場所周圍(100ft內)
     - 802.11b/g/n/ac/ax
-      - 11,54,450Mbps......越新越快
+      - 11,54,450 Mbps......越新越快
   - Wide-area cellular access networks
     - 手機行動網路，基地臺大範圍覆蓋
     - 4G、5G 行動上網
@@ -28,14 +28,14 @@
 - Store-and-forward
   - 封包須完整送達路由器，才會再傳輸至下一節點。
 - Transmission rate
-  - $R = Transmission\ rate\ (\frac{bits}{sec}\ or\ bps)$
+  - $R = \text{Transmission rate} (\frac{\text{bits}}{\text{sec}} \text{ or bps})$
   - 單位時間內可傳送的資料大小
 - Transmission delay
-  - $L = Packet\ size\ (bits)$
-  - $\displaystyle{d_{trans} = \frac{L}{R}}\ (sec)$
+  - $L = \text{Packet size} (\text{bits})$
+  - $\displaystyle{d_{trans} = \frac{L}{R}}\ (\text{sec})$
 - Queueing delay & packet loss
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
-  - 暫存器填滿時，Packet 可能會被丟棄(dropped)，造成 Packet loss
+  - 暫存器填滿時，Packet 可能會被丟棄 (dropped)，造成 Packet loss
 
 ## Network core: Circuit switching
 
@@ -51,11 +51,11 @@
 ## Internet Protocal Stack
 
 - 主要分成五層。
-  - application: 主要是應用程式的一些協定，例如：IMAP、SMTP、HTTP。
-  - transport: 主要是資料傳輸的一些協定，例如：TCP、UDP。
-  - network: 解決資料轉送與路由的問題，例如：IP。
-  - link: 解決硬體與軟體連接的問題：例如：乙太網路、802.11。
-  - physical: 主要是各種硬體，例如：數據機。
+  - application：主要是應用程式的一些協定，例如：IMAP、SMTP、HTTP。
+  - transport：主要是資料傳輸的一些協定，例如：TCP、UDP。
+  - network：解決資料轉送與路由的問題，例如：IP。
+  - link：解決硬體與軟體連接的問題：例如：乙太網路、802.11。
+  - physical：主要是各種硬體，例如：數據機。
 
 
 <img src="https://i.imgur.com/ROfdnT7.png" alt="image-20220928104435086" style="zoom:50%;" />
