@@ -23,7 +23,9 @@
 - Fiber optic cable (光纖)
 - Wireless radio (無線)
 
-## Network core: Packet switching
+## Network core
+
+### Packet switching
 
 - Store-and-forward
   - 封包須完整送達路由器，才會再傳輸至下一節點。
@@ -35,13 +37,18 @@
   - $\displaystyle{d_{trans} = \frac{L}{R}}\ (\text{sec})$
 - Queueing delay & packet loss
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
-  - 暫存器填滿時，Packet 可能會被丟棄 (dropped)，造成 Packet loss
+  - 暫存器填滿時，封包可能會被丟棄 (dropped)，造成封包遺失
+- 總共 n 個用戶，於指定時間內 k 個用戶同時傳輸的機率：
+  - Binomial distribution
+  - $P(\text{Total n users, at given time, k users transmitting simultaneously})=\displaystyle{C^n_k P^k(1-P)^{n-k}}$
+- 總共 n 個用戶，於指定時間內 k 個用戶以上同時傳輸的機率：
+  - $P(\text{Total n users, at given time, k users or more transmitting simultaneously})=\displaystyle{\sum^n_{i=k} C^n_i P^i(1-P)^{n-i}}$
 
-## Network core: Circuit switching
+### Circuit switching
 
 - Unnecessary store-and-forward
 - 端對端之間常時佔用，不共享頻寬
-- Switch 沒有 queueing delay
+- 交換器沒有 queueing delay
 - 當鏈路已滿時，拒絕新連線
 - Frequency Division Multiplexing (FDM)
   - 利用光、電進行分頻，在該頻段下進行傳輸
