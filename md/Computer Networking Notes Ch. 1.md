@@ -39,9 +39,10 @@
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
   - 暫存器填滿時，封包可能會被丟棄 (dropped)，造成封包遺失
 - 總共 n 個用戶，於指定時間內 k 個用戶同時傳輸的機率：
-  - Binomial distribution
+  - 使用 Binomial distribution 進行運算
   - $P(\text{Total n users, at given time, k users transmitting simultaneously})=\displaystyle{C^n_k P^k(1-P)^{n-k}}$
 - 總共 n 個用戶，於指定時間內 k 個用戶以上同時傳輸的機率：
+  - 可理解為多個 Binomial distruibution 的總和
   - $P(\text{Total n users, at given time, k users or more transmitting simultaneously})=\displaystyle{\sum^n_{i=k} C^n_i P^i(1-P)^{n-i}}$
 
 ### Circuit switching
