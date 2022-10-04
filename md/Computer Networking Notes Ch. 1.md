@@ -8,8 +8,8 @@
 - 電話線撥接 Digital subscriber line
   - 基於現有電話線進行網路連線
 - Wireless access networks
-  - Wireless local area networks 區域無線網路 (WLANs)
-    - 涵蓋於單一場所周圍(100ft內)
+  - Wireless local area networks 區域無線網路（WLANs）
+    - 涵蓋於單一場所周圍（100ft內）
     - 802.11b/g/n/ac/ax
       - 11,54,450 Mbps......越新越快
   - Wide-area cellular access networks
@@ -18,10 +18,10 @@
 
 ## Physical media
 
-- Twisted pair (雙絞線)
-- Coaxial cable (同軸電纜)
-- Fiber optic cable (光纖)
-- Wireless radio (無線)
+- Twisted pair（雙絞線）
+- Coaxial cable（同軸電纜）
+- Fiber optic cable（光纖）
+- Wireless radio（無線）
 
 ## Network core
 
@@ -37,11 +37,11 @@
   - $\displaystyle{d_{trans} = \frac{L}{R}}\ (\text{sec})$
 - Queueing delay & packet loss
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
-  - 暫存器填滿時，封包可能會被丟棄 (dropped)，造成封包遺失
-- 總共 n 個用戶，於指定時間內 k 個用戶同時傳輸的機率：
+  - 暫存器填滿時，封包可能會被丟棄（dropped），造成封包遺失（Packet loss）
+- 總共 $n$ 個用戶，於指定時間內 $k$ 個用戶同時傳輸的機率：
   - 使用 Binomial distribution 進行運算
   - $P(\text{Total n users, at given time, k users transmitting simultaneously})=\displaystyle{C^n_k P^k(1-P)^{n-k}}$
-- 總共 n 個用戶，於指定時間內 k 個用戶以上同時傳輸的機率：
+- 總共 $n$ 個用戶，於指定時間內 $k$ 個用戶以上同時傳輸的機率：
   - 可理解為多個 Binomial distruibution 的總和
   - $P(\text{Total n users, at given time, k users or more transmitting simultaneously})=\displaystyle{\sum^n_{i=k} C^n_i P^i(1-P)^{n-i}}$
 
@@ -49,11 +49,11 @@
 
 - 不必要進行 Store-and-forward
 - 端對端之間常時佔用，不共享頻寬
-- 交換器沒有 queueing delay
-- 當鏈路已滿時，拒絕新連線
-- Frequency Division Multiplexing (FDM)
+- 交換器沒有 Queueing Delay
+- 當鏈路（Link Capacity）已滿時，拒絕新連線
+- Frequency Division Multiplexing（FDM）
   - 利用光、電進行分頻，在該頻段下進行傳輸
-- Time Division Multiplexing (TDM)
+- Time Division Multiplexing（TDM）
   - 分時段，各連線可在分配的時間內佔用範圍內之頻段進行傳輸
 
 ## Internet Protocal Stack
