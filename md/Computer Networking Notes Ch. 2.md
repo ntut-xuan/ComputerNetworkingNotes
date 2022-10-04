@@ -106,7 +106,7 @@
 
 用以上的方法來得到 10 個圖片，每次要求一個物件，故需要連接 10 次。
 
-> Here should have a image to describe the description above.
+<img src="https://i.imgur.com/qxK9Ob7.png" alt="image-20221004170801974" style="zoom: 67%;" />
 
 
 
@@ -118,7 +118,7 @@
   - 因此我們可以估算對於 Non-persistent HTTP 的反應時間為：$2\text{RTT} + \text{file transmission time}$。
 - 若我們考慮傳輸距離，則這個 RTT 可能會很大或很小，對於一些需要 timing 的應用程式來說，可能會太久，故效率不好。
 
-> Here should have a image to describe the description above.
+<img src="https://i.imgur.com/9SB8aET.png" alt="image-20221004170924917" style="zoom:67%;" />
 
 
 
