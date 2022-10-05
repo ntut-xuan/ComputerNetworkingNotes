@@ -37,7 +37,7 @@
   - $\displaystyle{d_{trans} = \frac{L}{R}}\ (\text{sec})$
 - Queueing delay & packet loss
   - 資料到達速度大於資料送出的速度時，封包將會在路由器的暫存器中排隊
-  - 暫存器填滿時，封包可能會被丟棄（dropped），造成封包遺失（Packet loss）
+  - 暫存器填滿時，封包無法加入等待而被丟棄（dropped），造成封包遺失（Packet loss）
 - 總共 $n$ 個用戶，於指定時間內 $k$ 個用戶同時傳輸的機率：
   - 使用 Binomial distribution 進行運算
   - $P(\text{Total n users, at given time, k users transmitting simultaneously})=\displaystyle{C^n_k P^k(1-P)^{n-k}}$
@@ -52,9 +52,9 @@
 - 交換器沒有 Queueing Delay
 - 當鏈路（Link Capacity）已滿時，拒絕新連線
 - Frequency Division Multiplexing（FDM）
-  - 利用光、電進行分頻，在該頻段下進行傳輸
+  - 各連線僅獨佔其所屬頻段進行傳輸（不同的連線用不同的載波）
 - Time Division Multiplexing（TDM）
-  - 分時段，各連線可在分配的時間內佔用範圍內之頻段進行傳輸
+  - 各連線僅在其分配的時間內獨佔電路進行傳輸
 
 ## Internet Protocal Stack
 
@@ -96,6 +96,6 @@
 |   network   | datagram |
 |    link     |  frame   |
 
-​    
+​
 
 <img src="https://i.imgur.com/eepuz5p.png" alt="image-20220928105527026" style="zoom: 50%;" />
