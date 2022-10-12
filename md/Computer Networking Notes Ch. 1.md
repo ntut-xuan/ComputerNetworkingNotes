@@ -9,7 +9,7 @@
   - 基於現有電話線進行網路連線
 - Wireless access networks
   - Wireless local area networks 區域無線網路（WLANs）
-    - 涵蓋於單一場所周圍（100ft內）
+    - 涵蓋於單一場所周圍（100 ft 內）
     - 802.11b/g/n/ac/ax
       - 11,54,450 Mbps......越新越快
   - Wide-area cellular access networks
@@ -75,18 +75,15 @@
 - 在 presentation 中，主要是讓應用程式做加解密、壓縮等問題。
 - 在 session 中，主要是作用在校正、同步等問題
 
+
 <img src="https://i.imgur.com/qq7pbfN.png" alt="image-20220928104008681" style="zoom:50%;" />
-
-
 
 ## Encapsulation / Decapsulation
 
 > Need more infomation (NMI)
 
 - 對於資料的傳輸，會從任何模組的最上層加標頭（header）加到最下層，再進行傳輸（Encapsulation）。
-
 - 裝置與裝置之間的傳輸，目標裝置會解發送裝置提供的標頭，來得知資訊，這個動作叫做解封裝（Decapsulation）。
-
 - 每一層的標頭分別是：
 
 |    layer    |  header  |
@@ -94,8 +91,7 @@
 | application | message  |
 |  transport  | segment  |
 |   network   | datagram |
-|    link     |  frame   |
+|    link     |  frame   |   
 
-​    
 
 <img src="https://i.imgur.com/eepuz5p.png" alt="image-20220928105527026" style="zoom: 50%;" />
