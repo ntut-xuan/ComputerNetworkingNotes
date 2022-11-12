@@ -67,7 +67,7 @@ $d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
 
 ### Queueing delay
 
-當 packet 送入的速率越接近從 router 送出的速率，在 queue 中等待的時間越長，呈指數成長；在送入大於送出後，發生 packet loss，queue delay $\rightarrow \infty$。
+當 packet 送入的速率越接近從 router 送出的速率，在 queue 中等待的時間越長，呈指數成長；在送入大於送出後，發生 packet loss，queueing delay $\rightarrow \infty$。
 
 ## Internet Protocal Stack
 
