@@ -56,6 +56,19 @@
 - Time Division Multiplexing（TDM）
   - 各連線僅在其分配的時間內獨佔電路進行傳輸
 
+## Packet delay
+
+$d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
+
+1. processing delay（$d_{proc}$）：分析 packet 中的資訊（如錯誤檢查）與決定下個傳送目的地
+2. queueing delay（$d_{queue}$）：因為 router 一次只能傳送一個 packet，還沒輪到的在 queue（buffer）中等待
+3. transmission delay（$d_{trans}$）：將 packet 送出到 link 上需要時間（$\frac{L}{R}$），取決於 router 的頻寬
+4. propagation delay（$d_{prop}$）：在 link 上傳輸的時間（$\frac{d}{s}$），距離越長延遲越久
+
+### Queueing delay
+
+當 packet 送入的速率越接近從 router 送出的速率，在 queue 中等待的時間越長，呈指數成長；在送入大於送出後，發生 packet loss，queueing delay $\rightarrow \infty$。
+
 ## Internet Protocal Stack
 
 - 主要分成五層。
@@ -91,7 +104,7 @@
 | application | message  |
 |  transport  | segment  |
 |   network   | datagram |
-|    link     |  frame   |   
+|    link     |  frame   |
 
 
 <img src="https://i.imgur.com/eepuz5p.png" alt="image-20220928105527026" style="zoom: 50%;" />
