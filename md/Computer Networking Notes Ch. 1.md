@@ -1,29 +1,40 @@
 # Computer Networking Notes Ch. 1
 
-## Access network
+## Internet 的簡介
 
-- Cable-based access
-  - 基於電纜連線
-  - HFC，混合光纖同軸電纜
-- 電話線撥接 Digital subscriber line
-  - 基於現有電話線進行網路連線
-- Wireless access networks
-  - Wireless local area networks 區域無線網路（WLANs）
-    - 涵蓋於單一場所周圍（100 ft 內）
-    - 802.11b/g/n/ac/ax
-      - 11,54,450 Mbps......越新越快
-  - Wide-area cellular access networks
-    - 手機行動網路，基地臺大範圍覆蓋
-    - 4G、5G 行動上網
+- 世界規模的電腦網路，可以與世界數十億的電子產品進行網路互動。
+- 使用有線或者無線的方式進行連線，包括汽車、手機、筆電等等都需要 Internet。
 
-## Physical media
+<img src="https://i.imgur.com/JXTDrX8.png" alt="image-20221114174054685" style="zoom:75%;" />
 
-- Twisted pair（雙絞線）
-- Coaxial cable（同軸電纜）
-- Fiber optic cable（光纖）
-- Wireless radio（無線）
 
-## Network core
+
+## Protocol 的簡介
+
+- 概念上即為「與人進行互動」的類比。
+- 與人詢問問題會先打招呼→詢問問題→得到問題，而網路協議就如同類似的東西。
+
+<img src="https://i.imgur.com/tmimKWF.png" alt="image-20221114174349422" style="zoom:67%;" />
+
+
+
+## 邊緣網路
+
+- 與網路連接的電腦或設備，稱為邊緣系統，也稱為主機（host）。
+
+
+
+### 存取網路的方法
+
+- 考慮到主機到網路的物理連接方法，也就是存取網路的方法。
+- 我們可以分成以下幾種物理連接方法：
+  - 一般家庭網路連接的方式：使用數據機（DSL）、電纜（Cable）、FTTH、撥號（Dial-Up）或衛星（Satellite）。
+  - 企業網路連接的方式：Ethernet 或 Wi-Fi。
+  - 廣域網路連接的方式：3G、LTE。
+
+
+
+## 網路核心
 
 ### Packet switching
 
@@ -45,6 +56,8 @@
   - 可理解為多個 Binomial distruibution 的總和
   - $P(\text{Total n users, at given time, k users or more transmitting simultaneously})=\displaystyle{\sum^n_{i=k} C^n_i P^i(1-P)^{n-i}}$
 
+
+
 ### Circuit switching
 
 - 不必要進行 Store-and-forward
@@ -56,7 +69,11 @@
 - Time Division Multiplexing（TDM）
   - 各連線僅在其分配的時間內獨佔電路進行傳輸
 
-## Packet delay
+
+
+## Packet Switch 的時延、掉封包與吞吐量
+
+### Packet delay
 
 $d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
 
@@ -65,11 +82,17 @@ $d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
 3. transmission delay（$d_{trans}$）：將 packet 送出到 link 上需要時間（$\frac{L}{R}$），取決於 router 的頻寬
 4. propagation delay（$d_{prop}$）：在 link 上傳輸的時間（$\frac{d}{s}$），距離越長延遲越久
 
+
+
 ### Queueing delay
 
 當 packet 送入的速率越接近從 router 送出的速率，在 queue 中等待的時間越長，呈指數成長；在送入大於送出後，發生 packet loss，queueing delay $\rightarrow \infty$。
 
-## Internet Protocal Stack
+
+
+## 協定層次與服務模型
+
+### Internet Protocal Stack
 
 - 主要分成五層。
   - application：主要是應用程式的一些協定，例如：IMAP、SMTP、HTTP。
@@ -81,17 +104,18 @@ $d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
 
 <img src="https://i.imgur.com/ROfdnT7.png" alt="image-20220928104435086" style="zoom:50%;" />
 
-## ISO/OSI 七層模組
+### ISO/OSI 七層模組
 
 - 比 Internet protocal stack 多兩層，多了 presentation 與 session。
 - 在 Internet protocal stack 中，將 presentation 與 session 放到 application layer 去做。
 - 在 presentation 中，主要是讓應用程式做加解密、壓縮等問題。
 - 在 session 中，主要是作用在校正、同步等問題
 
-
 <img src="https://i.imgur.com/qq7pbfN.png" alt="image-20220928104008681" style="zoom:50%;" />
 
-## Encapsulation / Decapsulation
+
+
+### Encapsulation / Decapsulation
 
 > Need more infomation (NMI)
 
@@ -105,6 +129,5 @@ $d_{total} = d_{proc} + d_{queue} + d_{trans} + d_{prop}$
 |  transport  | segment  |
 |   network   | datagram |
 |    link     |  frame   |
-
 
 <img src="https://i.imgur.com/eepuz5p.png" alt="image-20220928105527026" style="zoom: 50%;" />

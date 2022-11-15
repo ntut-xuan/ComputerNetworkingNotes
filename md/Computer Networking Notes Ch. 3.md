@@ -304,3 +304,21 @@ rdt 3.0 可以使用以下的圖，來呈現遇到問題時解決的方式
 | :----------------------------------------------------------: | :---------------------------------------------------------: |
 | <img src="https://i.imgur.com/w0xsMpC.png" alt="image-20221115232925136" style="zoom: 80%;" /> | ![image-20221115233702212](https://i.imgur.com/gJttpqQ.png) |
 
+
+
+## 連接導向的傳輸方式：TCP
+
+### TCP
+
+- 點對點傳輸：One sender, one receiver.
+- 可依賴的，照順序的 byte stream
+- 
+
+### TCP Segment 結構
+
+<img src="https://i.imgur.com/Z9WBiFV.png" alt="image-20221116003149994" style="zoom:67%;" />
+
+
+
+### 往返時間的估計與超時
+
