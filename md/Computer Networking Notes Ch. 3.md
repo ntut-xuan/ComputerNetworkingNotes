@@ -320,5 +320,133 @@ rdt 3.0 可以使用以下的圖，來呈現遇到問題時解決的方式
 
 
 
+- Source port：來源端口號
+- Destination port：目標端口號
+- Sequence number：序號 (32 bits)
+- Acknowledgment number：確認號 (32 bits)
+- header length field：標頭長度欄位 (4bits - 20 bits)
+- flag field：標誌欄位 (6bits)
+  - ACK 用於確認 segment 的值是有效的
+  - RST、SYN、FIN 用於連接建立與拆除
+  - 壅塞告知使用 CWR 與 ECE 的欄位
+  - PSH 表示接收方應立即將資料給上層
+  - UGR 表示指示資料是緊急的，且會在 Ugent data pointer 指出。
+
+
+
+#### 序號與確認號
+
+- 當我們有大資料的時候，會將大資料切成小的 segment，每個 segment 都有一組序號。
+- 確認號通常意指在這個序號接收成功後，應該要接收到的序號。
+  - 例如第一筆資料傳送了 0~535 的資訊，第二筆應是 536~899 的資料，這時候確認號會填上 536。
+- TCP 會回傳目前傳送成功的最小 bits，稱為累積確認。
+  - 例如第一筆資料傳送了 0~535 的資訊，第二筆應是 536~899 的資料，但沒傳成功，第三筆 900 至 1000 的資料傳成功了。
+
+
+
+### Telnet
+
+> 待補
+
+
+
 ### 往返時間的估計與超時
 
+#### 估計往返時間
+
+- SampleRTT：某 segment 被發出到 segment 被接收的時間量。
+
+  - SampleRTT 不為重送的 segment 進行計算。
+
+- EstimatedRTT：由於 SampleRTT 是浮動的，所以我們考慮 SampleRTT 的平均值，每當獲得一個新的 SampleRTT 的時候，就會用以下的算式進行更新。
+  $$
+  \text{EstimatedRTT} = 0.875 \times \text{EstimatedRTT} + 0.125 \times \text{SampleRTT}
+  $$
+
+- 使用 SampleRTT 後，估計 RTT 與樣本 RTT 可以看出明顯的差別，估計 RTT 變得更加趨緩了
+
+<img src="https://i.imgur.com/T4gVeu0.png" alt="image-20221116025825195" style="zoom:67%;" />
+
+- DevRTT：用來估算 SampleRTT 偏離 EstimatedRTT 的程度
+  $$
+  \text{DevRTT} = (1-\beta) \times \text{DevRTT} + \beta \times |\text{SampleRTT} - \text{EstimatedRTT}|
+  $$
+  $\beta$ 值推薦 0.25。
+
+
+
+#### 設置與管理重傳超時間隔
+
+- 什麼時候該重傳？
+
+  - 大於 EstimatedRTT 時重傳，但如果大於 EstimatedRTT 太久又怕延遲過大，所以需要設置間隔。
+
+- TimeoutInterval 可以由以下的公式定義
+  $$
+  \text{TimeoutInterval} = \text{EstimatedRTT} + 4 \cdot \text{DevRTT}
+  $$
+  初始值建議 1 秒，出現超時則 TimeoutInterval 加倍。
+
+
+
+### 可靠資料傳輸
+
+#### TCP 傳送事件
+
+- TCP 是一個可靠資料傳輸的協定。
+- TCP 發送的簡化三大事件
+  - 從上面應用程式接收到資料 $e$
+    - 封裝到一個 segment 中，把 segment 交給 IP
+    - 如果定時器沒開啟則開啟定時器。
+  - 定時器超時
+    - 重傳最小序號但還沒被回應的 segment
+    - 啟動定時器。
+  - 收到 ACK，ACK 回傳序號 $y$
+    - 定義 sendbase 為最早未被確認的 segment 序號
+    - 如果 $y$ 大於 sendbase，則 sendbase 賦值為 $y$。
+    - 如果當前沒有任何 segment 的回應，重啟定時器。
+
+
+
+### 流量控制
+
+若某應用程式讀取資料的速度太慢，但傳送速度太快，就會導致大量暫存溢出，因此 TCP 需要提供流量控制，使用了壅塞控制。
+
+TCP 提供了一個接口稱為 receive window 的變量來提供流量控制，其定義如下：
+$$
+\text{Rev Buffer} \ge \text{LastByteRcvd - LastByteRead}$ \\
+\text{rwnd} = \text{Rev Buffer} - [\text{LastByteRcvd} - \text{LastByteRead}]
+$$
+若 $\text{rwnd} = 0$ 時，接收方透過 ACK 來告訴發送方不能再發送資料（Buffer 為 0），否則則可以發送資料（Buffer 不為 0）。
+
+
+
+### TCP 連接管理
+
+- 建立連線：三次握手（three-way handshake）
+  - 第一步：發送帶有 SYN=1、seq=client_isn 的特殊 TCP segment
+  - 第二步：若接收端同意了你的連線請求，發送 SYN=1、seq=server_isn、ack=client_isn+1 的特殊 TCP segment
+  - 第三步：發送端發送 SYN=0、seq=client_isn+1、ack=server_isn+1
+  - 由此，連接就開始了。
+
+<img src="https://i.imgur.com/72d4xLS.png" alt="image-20221116033320411" style="zoom:67%;" />
+
+- 結束連線：發送一個帶有 FIN 的標頭，接收端發送一個 FIN 的標頭，接著連接的資源就會全部釋放。
+
+<img src="https://i.imgur.com/4bCxD8Q.png" alt="image-20221116033327173" style="zoom:67%;" />
+
+
+
+## TCP 壅塞控制
+
+TCP 使用了三種不同的 algorithm 來控制 TCP 的壅塞情況，以避免壅塞情況發生導致暫存溢出，瘋狂掉包的問題。
+
+1. 慢啟動
+   - TCP 會設置一個較小的 MSS，然後開始指數增長得一次性發送越來越多的 segment，直到出現超時的現象。
+2. 壅塞避免
+   - 將 cwnd 的值設成遇到壅塞的值的一半，開始以線性增長的方式發送 segment。
+3. 快速恢復
+
+以此類推我們就能慢慢控制 ssthresh，來讓其封包的壅塞控制逐漸穩定。
+
+<img src="https://i.imgur.com/RmxbDKx.png" alt="image-20221116035319344" style="zoom:67%;" />
