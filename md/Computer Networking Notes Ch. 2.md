@@ -253,11 +253,66 @@
 
 傳輸信件需要三個組件：
 
-- SMTP：Simple Mail Transfer Protocol。
-
-- User Agent：使用者。
-
+- SMTP：Simple Mail Transfer Protocol，傳送信件的協定。
+- User Agent：信件閱讀器（例如：Outlook）。
 - Email Server：信件伺服器，具有以下幾個子組件：
   - Mailbox：存放給使用者的信件
   - Message Queue：存放即將傳送的信件
   - SMTP Protocal 可以讓信件伺服器發送信件（Client）以及接收寄來的信件（Server）。
+
+
+
+### RFC 5321
+
+使用 RFC 5321：
+
+- SMTP 的 Port 通常都是 25。
+- SMTP 通常都是直接傳送，從 Client 傳送到 Server。
+- 三階段傳送：Handshaking、傳送訊息、Closure。
+- command/response 互動模式（如同 HTTP），包含以 ASCII 文字的 Command，與包含 Status Vode 以及 Phrase 的 Response
+
+
+
+### The process of mail transfer
+
+以下演示了如何透過 STMP 協定進行寄信。
+
+1. Alice 使用 User Agent 來寫一封信，寄給 Bob。
+2. Alice 使用 mail server 把信寄給 Bob，信被放在 mail server 的 mail queue 內，等待被發送。
+3. Alice's mail server 利用 client side 的方式，開啟 Bob's mail server 的 server 端 TCP 連接。
+4. Alice's mail server 使用 STMP 協定，透過 TCP 來將信件送至 Bob's mail server 內。
+5. Bob's mail server 的 Mailbox 放置了 Alice 的信。
+6. Bob 使用 User Agent 來讀信。
+
+
+
+![image-20221106020726732](https://i.imgur.com/vh0FS6Q.png)
+
+
+
+### Mail message format
+
+使用 RFC 8022 的定義方式：
+
+- 信件分成 header 與 body，間隔一行來分隔。
+- header 具有 To、From、Subject 的欄位，分別是收件人、寄件人與主旨。
+- body 存放信件內容，必須是 ASCII 字元，
+
+<img src="https://i.imgur.com/EE1YaVL.png" alt="image-20221106023003775" style="zoom:67%;" />
+
+
+
+### Mail acccess
+
+![image-20221106023757790](https://i.imgur.com/mAckVYH.png) 
+
+
+
+在信件的傳輸中，過程可能提供多種不同的協定，這些協定大致的功能如下：
+
+- SMTP：負責寄信／存信到收件人的伺服器。
+- IMAP：Internet Mail Access Protocol，用來從本地端去存取遠端伺服器上的郵件的協定。
+- HTTP：提供給一個基於網頁的 SMTP 與 IMAP 去存取信件內容。
+
+
+
